@@ -317,9 +317,6 @@ export default function Page() {
             <TabsTrigger value="results" disabled={!userProfile}>
               Results
             </TabsTrigger>
-            <TabsTrigger value="ai" disabled={!userProfile} className="bg-gradient-to-r from-purple-600/20 to-pink-600/20">
-              AI Analysis
-            </TabsTrigger>
             <TabsTrigger value="comparison" disabled={!userProfile}>
               Compare
             </TabsTrigger>
@@ -347,6 +344,9 @@ export default function Page() {
             <TabsTrigger value="details" disabled={!selectedCareer}>
               Details
             </TabsTrigger>
+            <TabsTrigger value="ai" disabled={!userProfile} className="bg-gradient-to-r from-purple-600/20 to-pink-600/20">
+              AI Analysis
+            </TabsTrigger>
           </TabsList>
 
           {/* Input Form Tab */}
@@ -362,17 +362,6 @@ export default function Page() {
                 <UserInputForm onSubmit={handleFormSubmit} />
               </CardContent>
             </Card>
-          </TabsContent>
-
-          {/* AI Analysis Tab */}
-          <TabsContent value="ai" className="space-y-6 fade-in">
-            {userProfile && (
-              <>
-                <AISystemManager userProfile={userProfile} recommendations={recommendations} />
-                <CareerPathPrediction recommendations={recommendations} />
-                <PersonalityMatcher userProfile={userProfile} recommendations={recommendations} />
-              </>
-            )}
           </TabsContent>
 
           {/* Results Tab */}
@@ -461,6 +450,25 @@ export default function Page() {
           {/* Chat Tab */}
           <TabsContent value="chat" className="space-y-6">
             {userProfile && <CareerChatbot userProfile={userProfile} recommendations={recommendations} />}
+          </TabsContent>
+
+          {/* AI Analysis Tab - After All Analysis */}
+          <TabsContent value="ai" className="space-y-6 fade-in">
+            {userProfile && (
+              <>
+                <Card className="cosmic-border bg-card/50 backdrop-blur scale-up border-2 border-purple-500/50">
+                  <CardHeader className="bounce-in">
+                    <CardTitle className="glow-text text-purple-300">AI-Powered Deep Analysis</CardTitle>
+                    <CardDescription>
+                      Comprehensive AI insights based on all your career analysis results
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <AISystemManager userProfile={userProfile} recommendations={recommendations} />
+                <CareerPathPrediction recommendations={recommendations} />
+                <PersonalityMatcher userProfile={userProfile} recommendations={recommendations} />
+              </>
+            )}
           </TabsContent>
         </Tabs>
       </main>
