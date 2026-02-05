@@ -20,7 +20,9 @@ import ExportReport from '@/components/ExportReport'
 import AISystemManager from '@/components/AISystemManager'
 import PersonalityMatcher from '@/components/PersonalityMatcher'
 import CareerPathPrediction from '@/components/CareerPathPrediction'
-import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark, Brain } from 'lucide-react'
+import PremiumReports from '@/components/PremiumReports'
+import MentorConsulting from '@/components/MentorConsulting'
+import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark, Brain, CreditCard } from 'lucide-react'
 
 interface UserProfile {
   education: string
@@ -347,6 +349,12 @@ export default function Page() {
             <TabsTrigger value="ai" disabled={!userProfile} className="bg-gradient-to-r from-purple-600/20 to-pink-600/20">
               AI Analysis
             </TabsTrigger>
+            <TabsTrigger value="premium" disabled={!userProfile} className="bg-gradient-to-r from-yellow-600/20 to-orange-600/20">
+              Reports
+            </TabsTrigger>
+            <TabsTrigger value="mentors-paid" disabled={!userProfile} className="bg-gradient-to-r from-green-600/20 to-emerald-600/20">
+              Mentors
+            </TabsTrigger>
           </TabsList>
 
           {/* Input Form Tab */}
@@ -469,6 +477,16 @@ export default function Page() {
                 <PersonalityMatcher userProfile={userProfile} recommendations={recommendations} />
               </>
             )}
+          </TabsContent>
+
+          {/* Premium Reports Tab */}
+          <TabsContent value="premium" className="space-y-6 fade-in">
+            {userProfile && <PremiumReports userProfile={userProfile} />}
+          </TabsContent>
+
+          {/* Mentor Consulting Tab */}
+          <TabsContent value="mentors-paid" className="space-y-6 fade-in">
+            {userProfile && <MentorConsulting recommendations={recommendations} />}
           </TabsContent>
         </Tabs>
       </main>
