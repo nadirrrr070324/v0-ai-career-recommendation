@@ -252,7 +252,7 @@ export default function Page() {
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold glow-text">CareerIQ</h1>
-                <p className="text-xs md:text-sm text-muted-foreground">AI Career Intelligence Platform</p>
+                <p className="text-xs md:text-sm text-muted-foreground">AI-powered career intelligence platform</p>
               </div>
             </div>
             
@@ -361,7 +361,7 @@ export default function Page() {
           <TabsContent value="input" className="space-y-6 fade-in">
             <Card className="cosmic-border bg-card/50 backdrop-blur scale-up">
               <CardHeader className="bounce-in">
-                <CardTitle className="glow-text text-purple-300">Career Discovery Journey</CardTitle>
+                <CardTitle className="glow-text text-purple-300">Career discovery journey</CardTitle>
                 <CardDescription>
                   Share your education, skills, and interests to discover your ideal career path
                 </CardDescription>
@@ -378,12 +378,12 @@ export default function Page() {
               <>
                 <Card className="cosmic-border bg-card/50 backdrop-blur scale-up">
                   <CardHeader className="bounce-in">
-                    <CardTitle className="glow-text text-purple-300">Your Career Readiness</CardTitle>
+                    <CardTitle className="glow-text text-purple-300">Your career readiness</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium">Overall Career Readiness</span>
+                        <span className="text-sm font-medium">Overall career readiness</span>
                         <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white animate-pulse">{overallReadiness}%</Badge>
                       </div>
                       <Progress value={overallReadiness} className="h-2" />
@@ -466,7 +466,7 @@ export default function Page() {
               <>
                 <Card className="cosmic-border bg-card/50 backdrop-blur scale-up border-2 border-purple-500/50">
                   <CardHeader className="bounce-in">
-                    <CardTitle className="glow-text text-purple-300">AI-Powered Deep Analysis</CardTitle>
+                    <CardTitle className="glow-text text-purple-300">AI-powered deep analysis</CardTitle>
                     <CardDescription>
                       Comprehensive AI insights based on all your career analysis results
                     </CardDescription>
@@ -494,7 +494,7 @@ export default function Page() {
       {/* Footer */}
       <footer className="border-t border-purple-900/30 bg-background/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          <p>Celestial Career Hub © 2025 | Powered by AI • Guided by Data • Inspired by Your Future</p>
+          <p>CareerIQ © 2026 | Powered by AI • Guided by Data • Inspired by Your Future</p>
         </div>
       </footer>
     </div>
