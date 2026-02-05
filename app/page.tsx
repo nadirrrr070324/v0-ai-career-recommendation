@@ -22,7 +22,9 @@ import PersonalityMatcher from '@/components/PersonalityMatcher'
 import CareerPathPrediction from '@/components/CareerPathPrediction'
 import PremiumReports from '@/components/PremiumReports'
 import MentorConsulting from '@/components/MentorConsulting'
+import ProfileDropdown from '@/components/ProfileDropdown'
 import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark, Brain, CreditCard } from 'lucide-react'
+import { Sparkles as SparklesIcon } from 'lucide-react'
 
 interface UserProfile {
   education: string
@@ -248,7 +250,7 @@ export default function Page() {
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 flex-1">
               <div className="p-2 rounded-lg cosmic-glow glow-pulse">
-                <Sparkles className="w-6 h-6 text-purple-400 animate-spin" />
+                <SparklesIcon className="w-6 h-6 text-purple-400 animate-spin" />
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold glow-text">CareerIQ</h1>
@@ -256,56 +258,66 @@ export default function Page() {
               </div>
             </div>
             
-            {/* AI Quick Commands */}
-            <div className="relative">
-              <Button
-                onClick={() => setShowAIMenu(!showAIMenu)}
-                className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
-              >
-                <Zap className="w-4 h-4" />
-                AI Shortcuts
-              </Button>
+            {/* Profile Dropdown and AI Quick Commands */}
+            <div className="flex items-center gap-2">
+              <ProfileDropdown
+                onProfileClick={() => window.location.href = '/profile'}
+                onSettingsClick={() => alert('Settings coming soon')}
+                onLogoutClick={() => {
+                  alert('Logged out successfully')
+                  window.location.href = '/auth'
+                }}
+              />
+              <div className="relative">
+                <Button
+                  onClick={() => setShowAIMenu(!showAIMenu)}
+                  className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
+                >
+                  <Zap className="w-4 h-4" />
+                  AI Shortcuts
+                </Button>
               
-              {showAIMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-card border cosmic-border rounded-lg shadow-lg z-50">
-                  <div className="p-2 space-y-1">
-                    <button
-                      onClick={() => {
-                        setActiveTab('chat')
-                        setShowAIMenu(false)
-                      }}
-                      className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
-                    >
-                      <MessageSquare className="w-4 h-4" />
-                      Ask Career Questions
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (recommendations.length > 0) {
-                          setActiveTab('comparison')
+                {showAIMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-card border cosmic-border rounded-lg shadow-lg z-50">
+                    <div className="p-2 space-y-1">
+                      <button
+                        onClick={() => {
+                          setActiveTab('chat')
                           setShowAIMenu(false)
-                        }
-                      }}
-                      className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
-                    >
-                      <TrendingUp className="w-4 h-4" />
-                      Compare Careers
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (recommendations.length > 0) {
-                          setActiveTab('interview')
-                          setShowAIMenu(false)
-                        }
-                      }}
-                      className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
-                    >
-                      <Bookmark className="w-4 h-4" />
-                      Interview Prep
-                    </button>
-                  </div>
+                        }}
+                        className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
+                      >
+                        <MessageSquare className="w-4 h-4" />
+                        Ask Career Questions
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (recommendations.length > 0) {
+                            setActiveTab('comparison')
+                            setShowAIMenu(false)
+                          }
+                        }}
+                        className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
+                      >
+                        <TrendingUp className="w-4 h-4" />
+                        Compare Careers
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (recommendations.length > 0) {
+                            setActiveTab('interview')
+                            setShowAIMenu(false)
+                          }
+                        }}
+                        className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
+                      >
+                        <Bookmark className="w-4 h-4" />
+                        Interview Prep
+                      </button>
+                    </div>
                 </div>
               )}
+            </div>
             </div>
           </div>
         </div>
