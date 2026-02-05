@@ -162,6 +162,46 @@ body {
       transform: rotate(0deg) scale(1);
     }
   }
+
+  /* Accessibility Utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .high-contrast {
+    @apply border-2 border-foreground;
+  }
+
+  .dyslexia-font {
+    font-family: 'OpenDyslexic', 'Lexend Deca', sans-serif;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+  }
+
+  .large-text {
+    @apply text-lg;
+  }
+
+  .reduce-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .screen-reader-optimized {
+    @apply focus-visible:ring-2 focus-visible:ring-purple-400;
+  }
 }
 
 @layer base {

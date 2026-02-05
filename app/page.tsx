@@ -23,8 +23,8 @@ import CareerPathPrediction from '@/components/CareerPathPrediction'
 import PremiumReports from '@/components/PremiumReports'
 import MentorConsulting from '@/components/MentorConsulting'
 import ProfileDropdown from '@/components/ProfileDropdown'
+import AccessibilityToggle from '@/components/AccessibilityToggle'
 import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark, Brain, CreditCard } from 'lucide-react'
-import { Sparkles as SparklesIcon } from 'lucide-react'
 
 interface UserProfile {
   education: string
@@ -244,6 +244,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen stars-background bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900">
+      <AccessibilityToggle />
       {/* Professional Header */}
       <header className="border-b border-purple-900/30 bg-background/50 backdrop-blur-sm sticky top-0 z-40 slide-in">
         <div className="container mx-auto px-4 py-4">
