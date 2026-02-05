@@ -1,4 +1,4 @@
-# Celestial Career Hub - AI-Powered Career Recommendation Engine
+# Career IQ Hub - AI-Powered Career Recommendation Engine
 
 A stunning Next.js application featuring a cosmic theme that helps users discover their ideal career paths using AI-powered recommendations with advanced career exploration features.
 
