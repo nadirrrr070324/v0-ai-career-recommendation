@@ -1,5 +1,5 @@
 import React from "react"
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
 import './globals.css'
@@ -11,7 +11,13 @@ export const metadata: Metadata = {
   title: 'CareerIQ - AI-powered career intelligence platform',
   description: 'Discover your perfect career path with AI-powered recommendations, skill tracking, market trends, and expert mentorship guidance.',
   generator: 'v0.app',
-  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 5.0,
+  userScalable: true,
 }
 
 export default function RootLayout({

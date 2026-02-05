@@ -251,7 +251,7 @@ export default function Page() {
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 flex-1">
               <div className="p-2 rounded-lg cosmic-glow glow-pulse">
-                <SparklesIcon className="w-6 h-6 text-purple-400 animate-spin" />
+                <Sparkles className="w-6 h-6 text-purple-400 animate-spin" />
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold glow-text">CareerIQ</h1>
