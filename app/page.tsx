@@ -14,7 +14,10 @@ import JobMarketTrends from '@/components/JobMarketTrends'
 import MentorConnections from '@/components/MentorConnections'
 import InterviewPrepGuide from '@/components/InterviewPrepGuide'
 import CareerChatbot from '@/components/CareerChatbot'
-import { Sparkles } from 'lucide-react'
+import CareerDetailsModal from '@/components/CareerDetailsModal'
+import SalaryNegotiationGuide from '@/components/SalaryNegotiationGuide'
+import ExportReport from '@/components/ExportReport'
+import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark } from 'lucide-react'
 
 interface UserProfile {
   education: string
@@ -44,6 +47,10 @@ export default function Page() {
   const [recommendations, setRecommendations] = useState<CareerRecommendation[]>([])
   const [activeTab, setActiveTab] = useState('input')
   const [overallReadiness, setOverallReadiness] = useState(0)
+  const [selectedCareer, setSelectedCareer] = useState<CareerRecommendation | null>(null)
+  const [showDetailsModal, setShowDetailsModal] = useState(false)
+  const [savedCareers, setSavedCareers] = useState<string[]>([])
+  const [showAIMenu, setShowAIMenu] = useState(false)
 
   const careerDatabase = [
     {
@@ -212,20 +219,83 @@ export default function Page() {
     setActiveTab('results')
   }
 
+  const handleCareerDetailsClick = (career: CareerRecommendation) => {
+    setSelectedCareer(career)
+    setShowDetailsModal(true)
+  }
+
+  const toggleSaveCareer = (careerName: string) => {
+    setSavedCareers((prev) =>
+      prev.includes(careerName) ? prev.filter((c) => c !== careerName) : [...prev, careerName]
+    )
+  }
+
   return (
     <div className="min-h-screen stars-background bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900">
-      {/* Header */}
-      <header className="border-b border-purple-900/30 bg-background/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+      {/* Professional Header */}
+      <header className="border-b border-purple-900/30 bg-background/50 backdrop-blur-sm sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 flex-1">
               <div className="p-2 rounded-lg cosmic-glow">
                 <Sparkles className="w-6 h-6 text-purple-400" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold glow-text text-purple-300">Celestial Career Hub</h1>
-                <p className="text-sm text-muted-foreground">AI-Powered Career Discovery</p>
+                <h1 className="text-2xl md:text-3xl font-bold glow-text">Celestial Career Hub</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">Professional Career Intelligence Platform</p>
               </div>
+            </div>
+            
+            {/* AI Quick Commands */}
+            <div className="relative">
+              <Button
+                onClick={() => setShowAIMenu(!showAIMenu)}
+                className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
+              >
+                <Zap className="w-4 h-4" />
+                AI Shortcuts
+              </Button>
+              
+              {showAIMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-card border cosmic-border rounded-lg shadow-lg z-50">
+                  <div className="p-2 space-y-1">
+                    <button
+                      onClick={() => {
+                        setActiveTab('chat')
+                        setShowAIMenu(false)
+                      }}
+                      className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      Ask Career Questions
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (recommendations.length > 0) {
+                          setActiveTab('comparison')
+                          setShowAIMenu(false)
+                        }
+                      }}
+                      className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
+                    >
+                      <TrendingUp className="w-4 h-4" />
+                      Compare Careers
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (recommendations.length > 0) {
+                          setActiveTab('interview')
+                          setShowAIMenu(false)
+                        }
+                      }}
+                      className="w-full text-left px-3 py-2 rounded hover:bg-purple-900/30 text-sm flex items-center gap-2"
+                    >
+                      <Bookmark className="w-4 h-4" />
+                      Interview Prep
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -234,7 +304,7 @@ export default function Page() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 pb-16">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-8 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-11 mb-8 bg-background/30 backdrop-blur">
             <TabsTrigger value="input">Start</TabsTrigger>
             <TabsTrigger value="results" disabled={!userProfile}>
               Results
@@ -254,8 +324,17 @@ export default function Page() {
             <TabsTrigger value="interview" disabled={!userProfile}>
               Interview
             </TabsTrigger>
+            <TabsTrigger value="salary" disabled={!userProfile}>
+              Salary
+            </TabsTrigger>
+            <TabsTrigger value="export" disabled={!userProfile}>
+              Export
+            </TabsTrigger>
             <TabsTrigger value="chat" disabled={!userProfile}>
               Chat
+            </TabsTrigger>
+            <TabsTrigger value="details" disabled={!userProfile || !selectedCareer}>
+              Details
             </TabsTrigger>
           </TabsList>
 
@@ -323,6 +402,33 @@ export default function Page() {
           <TabsContent value="interview" className="space-y-6">
             {userProfile && (
               <InterviewPrepGuide recommendations={recommendations} />
+            )}
+          </TabsContent>
+
+          {/* Salary & Negotiation Tab */}
+          <TabsContent value="salary" className="space-y-6">
+            {userProfile && <SalaryNegotiationGuide recommendations={recommendations} />}
+          </TabsContent>
+
+          {/* Export & Reports Tab */}
+          <TabsContent value="export" className="space-y-6">
+            {userProfile && (
+              <ExportReport
+                userProfile={userProfile}
+                recommendations={recommendations}
+                savedCareers={savedCareers}
+              />
+            )}
+          </TabsContent>
+
+          {/* Career Details Modal Tab */}
+          <TabsContent value="details" className="space-y-6">
+            {selectedCareer && (
+              <CareerDetailsModal
+                career={selectedCareer}
+                isSaved={savedCareers.includes(selectedCareer.name)}
+                onToggleSave={() => toggleSaveCareer(selectedCareer.name)}
+              />
             )}
           </TabsContent>
 
