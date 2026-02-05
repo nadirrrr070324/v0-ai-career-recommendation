@@ -333,7 +333,7 @@ export default function Page() {
             <TabsTrigger value="chat" disabled={!userProfile}>
               Chat
             </TabsTrigger>
-            <TabsTrigger value="details" disabled={!userProfile || !selectedCareer}>
+            <TabsTrigger value="details" disabled={!selectedCareer}>
               Details
             </TabsTrigger>
           </TabsList>
@@ -371,7 +371,11 @@ export default function Page() {
                     </div>
                   </CardContent>
                 </Card>
-                <RecommendationResults recommendations={recommendations} userProfile={userProfile} />
+                <RecommendationResults 
+                  recommendations={recommendations} 
+                  userProfile={userProfile}
+                  onSelectCareer={handleCareerDetailsClick}
+                />
               </>
             )}
           </TabsContent>
