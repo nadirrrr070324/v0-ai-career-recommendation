@@ -17,7 +17,10 @@ import CareerChatbot from '@/components/CareerChatbot'
 import CareerDetailsModal from '@/components/CareerDetailsModal'
 import SalaryNegotiationGuide from '@/components/SalaryNegotiationGuide'
 import ExportReport from '@/components/ExportReport'
-import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark } from 'lucide-react'
+import AISystemManager from '@/components/AISystemManager'
+import PersonalityMatcher from '@/components/PersonalityMatcher'
+import CareerPathPrediction from '@/components/CareerPathPrediction'
+import { Sparkles, Zap, Download, TrendingUp, MessageSquare, Bookmark, Brain } from 'lucide-react'
 
 interface UserProfile {
   education: string
@@ -216,7 +219,12 @@ export default function Page() {
       recs.reduce((sum, r) => sum + r.matchPercentage, 0) / recs.length
     )
     setOverallReadiness(avgReadiness)
-    setActiveTab('results')
+    
+    // Auto-shift with animation
+    setTimeout(() => {
+      setActiveTab('results')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 300)
   }
 
   const handleCareerDetailsClick = (career: CareerRecommendation) => {
@@ -304,10 +312,13 @@ export default function Page() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 pb-16">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-11 mb-8 bg-background/30 backdrop-blur">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 lg:grid-cols-12 mb-8 bg-background/30 backdrop-blur">
             <TabsTrigger value="input">Start</TabsTrigger>
             <TabsTrigger value="results" disabled={!userProfile}>
               Results
+            </TabsTrigger>
+            <TabsTrigger value="ai" disabled={!userProfile} className="bg-gradient-to-r from-purple-600/20 to-pink-600/20">
+              AI Analysis
             </TabsTrigger>
             <TabsTrigger value="comparison" disabled={!userProfile}>
               Compare
@@ -351,6 +362,17 @@ export default function Page() {
                 <UserInputForm onSubmit={handleFormSubmit} />
               </CardContent>
             </Card>
+          </TabsContent>
+
+          {/* AI Analysis Tab */}
+          <TabsContent value="ai" className="space-y-6 fade-in">
+            {userProfile && (
+              <>
+                <AISystemManager userProfile={userProfile} recommendations={recommendations} />
+                <CareerPathPrediction recommendations={recommendations} />
+                <PersonalityMatcher userProfile={userProfile} recommendations={recommendations} />
+              </>
+            )}
           </TabsContent>
 
           {/* Results Tab */}
