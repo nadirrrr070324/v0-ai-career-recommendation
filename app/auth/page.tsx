@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import GoogleAuth from '@/components/GoogleAuth'
 import Link from 'next/link'
 import { Sparkles, Mail, Lock, User, Phone, Calendar, GraduationCap } from 'lucide-react'
 
@@ -62,6 +63,9 @@ export default function AuthPage() {
           </CardHeader>
 
           <CardContent className="space-y-4">
+            {/* Google Authentication - First Option */}
+            <GoogleAuth />
+
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Sign Up Fields */}
               {!isLogin && (
