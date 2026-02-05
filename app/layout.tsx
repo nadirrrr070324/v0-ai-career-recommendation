@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Celestial Career Hub - AI Career Recommendation Engine',
+  title: 'CareerIQ - AI-Powered Career Intelligence Platform',
   description: 'Discover your perfect career path with AI-powered recommendations, skill tracking, market trends, and expert mentorship guidance.',
   generator: 'v0.app',
   viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes',

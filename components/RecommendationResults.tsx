@@ -61,40 +61,40 @@ export default function RecommendationResults({
     <div className="space-y-6">
       {/* Summary Stats */}
       <div className="grid md:grid-cols-4 gap-4">
-        <Card className="card-professional">
+        <Card className="card-professional bounce-in">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-3xl font-bold gradient-text mb-2">
+              <div className="text-3xl font-bold gradient-text mb-2 glow-pulse">
                 {recommendations[0]?.matchPercentage || 0}%
               </div>
               <p className="text-xs text-muted-foreground">Top Match Score</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="card-professional">
+        <Card className="card-professional bounce-in" style={{ animationDelay: '0.1s' }}>
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400 mb-2">
+              <div className="text-3xl font-bold text-purple-400 mb-2 shimmer">
                 {recommendations.length}
               </div>
               <p className="text-xs text-muted-foreground">Top Careers</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="card-professional">
+        <Card className="card-professional bounce-in" style={{ animationDelay: '0.2s' }}>
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400 mb-2">
+              <div className="text-3xl font-bold text-pink-400 mb-2 shimmer">
                 {userProfile.skills.length}
               </div>
               <p className="text-xs text-muted-foreground">Current Skills</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="card-professional">
+        <Card className="card-professional bounce-in" style={{ animationDelay: '0.3s' }}>
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400 mb-2">
+              <div className="text-3xl font-bold text-blue-400 mb-2 glow-pulse">
                 {Math.round(recommendations.reduce((a, b) => a + b.matchPercentage, 0) / recommendations.length)}%
               </div>
               <p className="text-xs text-muted-foreground">Avg Readiness</p>
@@ -108,9 +108,10 @@ export default function RecommendationResults({
         {recommendations.map((career, index) => (
           <Card
             key={index}
-            className={`card-professional overflow-hidden cursor-pointer transition-all ${
-              expandedIndex === index ? 'ring-2 ring-purple-500' : ''
+            className={`card-professional overflow-hidden cursor-pointer transition-all slide-in ${
+              expandedIndex === index ? 'ring-2 ring-purple-500 glow-pulse' : ''
             }`}
+            style={{ animationDelay: `${index * 0.1}s` }}
             onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
           >
             <CardHeader className="pb-3">

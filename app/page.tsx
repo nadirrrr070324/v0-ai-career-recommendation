@@ -233,16 +233,16 @@ export default function Page() {
   return (
     <div className="min-h-screen stars-background bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900">
       {/* Professional Header */}
-      <header className="border-b border-purple-900/30 bg-background/50 backdrop-blur-sm sticky top-0 z-40">
+      <header className="border-b border-purple-900/30 bg-background/50 backdrop-blur-sm sticky top-0 z-40 slide-in">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 flex-1">
-              <div className="p-2 rounded-lg cosmic-glow">
-                <Sparkles className="w-6 h-6 text-purple-400" />
+              <div className="p-2 rounded-lg cosmic-glow glow-pulse">
+                <Sparkles className="w-6 h-6 text-purple-400 animate-spin" />
               </div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold glow-text">Celestial Career Hub</h1>
-                <p className="text-xs md:text-sm text-muted-foreground">Professional Career Intelligence Platform</p>
+                <h1 className="text-2xl md:text-3xl font-bold glow-text">CareerIQ</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">AI Career Intelligence Platform</p>
               </div>
             </div>
             
@@ -339,9 +339,9 @@ export default function Page() {
           </TabsList>
 
           {/* Input Form Tab */}
-          <TabsContent value="input" className="space-y-6">
-            <Card className="cosmic-border bg-card/50 backdrop-blur">
-              <CardHeader>
+          <TabsContent value="input" className="space-y-6 fade-in">
+            <Card className="cosmic-border bg-card/50 backdrop-blur scale-up">
+              <CardHeader className="bounce-in">
                 <CardTitle className="glow-text text-purple-300">Career Discovery Journey</CardTitle>
                 <CardDescription>
                   Share your education, skills, and interests to discover your ideal career path
@@ -354,18 +354,18 @@ export default function Page() {
           </TabsContent>
 
           {/* Results Tab */}
-          <TabsContent value="results" className="space-y-6">
+          <TabsContent value="results" className="space-y-6 fade-in">
             {userProfile && (
               <>
-                <Card className="cosmic-border bg-card/50 backdrop-blur">
-                  <CardHeader>
+                <Card className="cosmic-border bg-card/50 backdrop-blur scale-up">
+                  <CardHeader className="bounce-in">
                     <CardTitle className="glow-text text-purple-300">Your Career Readiness</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium">Overall Career Readiness</span>
-                        <Badge className="bg-purple-600 text-white">{overallReadiness}%</Badge>
+                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white animate-pulse">{overallReadiness}%</Badge>
                       </div>
                       <Progress value={overallReadiness} className="h-2" />
                     </div>
